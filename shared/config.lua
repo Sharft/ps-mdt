@@ -6,7 +6,13 @@ Config.RosterLink = {
     ['bcso'] = '',
     ['doj'] = '',
 }
-
+Config.chargesLink = {
+    ['police'] = '',
+    -- For EMS, can use as a link to training material for treating XYZ
+    ['ambulance'] = '',
+    ['bcso'] = '',
+    ['doj'] = '',
+}
 
 Config.UseWolfknightRadar = false
 --[[
