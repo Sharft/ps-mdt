@@ -23,7 +23,6 @@ var LastName = "";
 var DispatchNum = 0;
 var playerJob = "";
 let rosterLink  = "";
-let chargesLink = "";
 
 let impoundChanged = false;
 
@@ -37,7 +36,8 @@ const AmbulanceJobs = {
 }
 
 const DojJobs = {
-  ['lawyer']: true
+  ['lawyer']: true,
+  ['judge']: true
 }
 
 const MONTH_NAMES = [
@@ -3085,7 +3085,6 @@ $(document).ready(() => {
         }, 750);
 
         setTimeout(() => {
-          let dbid = $(".weapon-information-title-holder").data("dbid");
           let serial = $(".weapon-info-serial-input").val();
           let notes = $(".weapon-info-content").val();
           let owner = $(".weapon-info-owner-input").val();
@@ -3103,7 +3102,6 @@ $(document).ready(() => {
           $.post(
             `https://${GetParentResourceName()}/saveWeaponInfo`,
             JSON.stringify({
-              dbid: dbid,
               serial: serial,
               imageurl: imageurl,
               notes: notes,
@@ -3798,7 +3796,6 @@ $(document).ready(() => {
           "Officers Involved"
         );
         $(".roster-iframe").attr("src", rosterLink);
-        $(".charges-iframe").attr("src", chargesLink);
 
         $(".manage-profile-save").css("display", "block");
         $(".manage-profile-editing-title").css("display", "block");
@@ -3896,8 +3893,6 @@ $(document).ready(() => {
         $(".manage-profile-name-input-1").attr("readonly", true);
         $(".manage-profile-name-input-2").attr("readonly", true);
         $(".roster-iframe").attr("src", rosterLink);
-        $(".penalcode-nav-item").html("Training");
-        $(".charges-iframe").attr("src", chargesLink);
 
         $(".manage-profile-save").css("display", "block");
         $(".manage-profile-editing-title").css("display", "block");
@@ -3956,7 +3951,6 @@ $(document).ready(() => {
         $(".manage-profile-name-input-2").attr("readonly", false);
         $("#home-warrants-container").css("height", "98%");
         $(".roster-iframe").attr("src", rosterLink);
-        $(".charges-iframe").attr("src", chargesLink);
 
         $(".manage-profile-save").css("display", "none");
         $(".manage-profile-editing-title").css("display", "none");
@@ -3982,7 +3976,6 @@ $(document).ready(() => {
     if (eventData.type == "show") {
       if (eventData.enable == true) {
         rosterLink = eventData.rosterLink;
-        chargesLink = eventData.chargesLink;
         playerJob = eventData.job;
         JobColors(playerJob);
         $(".quote-span").html(randomizeQuote());

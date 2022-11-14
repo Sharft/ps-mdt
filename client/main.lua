@@ -133,7 +133,6 @@ end
 local function EnableGUI(enable)
     SetNuiFocus(enable, enable)
     SendNUIMessage({ type = "show", enable = enable, job = PlayerData.job.name, rosterLink = Config.RosterLink[PlayerData.job.name] })
-    SendNUIMessage({ type = "show", enable = enable, job = PlayerData.job.name, chargesLink = Config.chargesLink[PlayerData.job.name] })
     isOpen = enable
     doAnimation()
 end
@@ -141,8 +140,6 @@ end
 local function RefreshGUI()
     SetNuiFocus(false, false)
     SendNUIMessage({ type = "show", enable = false, job = PlayerData.job.name, rosterLink = Config.RosterLink[PlayerData.job.name] })
-    SendNUIMessage({ type = "show", enable = false, job = PlayerData.job.name, chargesLink = Config.chargesLink[PlayerData.job.name] })
-
     isOpen = false
 end
 
@@ -634,7 +631,6 @@ RegisterNUICallback("searchWeapons", function(data, cb)
 end)
 
 RegisterNUICallback("saveWeaponInfo", function(data, cb)
-    local dbid = data.dbid
     local serial = data.serial
     local notes = data.notes
     local imageurl = data.imageurl
@@ -643,8 +639,7 @@ RegisterNUICallback("saveWeaponInfo", function(data, cb)
     local weapModel = data.weapModel
     local JobType = GetJobType(PlayerData.job.name)
     if JobType == 'police' then
-        print(dbid)
-        TriggerServerEvent('mdt:server:saveWeaponInfo', dbid, serial, imageurl, notes, owner, weapClass, weapModel)
+        TriggerServerEvent('mdt:server:saveWeaponInfo', serial, imageurl, notes, owner, weapClass, weapModel)
     end
     cb(true)
 end)
